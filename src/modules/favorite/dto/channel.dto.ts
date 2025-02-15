@@ -49,6 +49,7 @@ class GetChannelDTO implements Partial<LiveDetail> {
   liveCategory?: string;
   liveCategoryValue?: string;
   channel: PartialChannelDTO;
+  videoUrl: string;
 }
 
 export class GetChannelsDTO {

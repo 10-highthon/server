@@ -27,7 +27,13 @@ export class FavoriteService {
       channelIds.map((channelId) => this.chzzkService.getLiveDetail(channelId)),
     );
 
-    return { channels: liveDetails, count: liveDetails.length };
+    return {
+      channels: liveDetails.map((detail) => ({
+        ...detail,
+        videoUrl: detail.livePlayback.media[0]?.path ?? "",
+      })),
+      count: liveDetails.length,
+    };
   }
 
   async addChannel(userId: string, channelId: string) {
