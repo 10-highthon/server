@@ -14,6 +14,10 @@ export class FavoriteService {
     return await this.chzzkService.search(query);
   }
 
+  async getChannel(channelId: string) {
+    return await this.chzzkService.getChannel(channelId);
+  }
+
   async getChannels(userId: string) {
     const channelIds = (
       await this.prisma.favorite.findMany({

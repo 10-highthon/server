@@ -1,4 +1,4 @@
-import { LiveDetail, LivePollingStatus, PartialChannel } from "chzzk";
+import { Channel, LiveDetail, LivePollingStatus, PartialChannel } from "chzzk";
 import { IsString } from "class-validator";
 
 export class OneChannelDTO {
@@ -9,6 +9,18 @@ export class OneChannelDTO {
 export class MultiChannelDTO {
   @IsString({ each: true })
   channelIds: string[];
+}
+
+export class ChannelDTO implements Channel {
+  channelDescription: string;
+  followerCount: number;
+  openLive: boolean;
+  channelId: string;
+  channelName: string;
+  channelImageUrl?: string;
+  verifiedMark: boolean;
+  userAdultStatus?: string;
+  personalData?: { privateUserBlock: boolean };
 }
 
 class PartialChannelDTO implements PartialChannel {

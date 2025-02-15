@@ -4,6 +4,7 @@ import { ApiBearerAuth, ApiBody, ApiQuery, ApiTags } from "@nestjs/swagger";
 import { GetUser } from "src/common/decorators/get.user.decorator";
 
 import {
+  ChannelDTO,
   GetChannelsDTO,
   MultiChannelDTO,
   OneChannelDTO,
@@ -22,6 +23,12 @@ export class FavoriteController {
   }
 
   @Get()
+  @ApiQuery({ name: "channelId", type: String })
+  async getChannel(@Query("channelId") channelId: string): Promise<ChannelDTO> {
+    return await this.favoriteService.getChannel(channelId);
+  }
+
+  @Get("/all")
   @ApiBearerAuth()
   async getChannels(@GetUser() userId: string): Promise<GetChannelsDTO> {
     return await this.favoriteService.getChannels(userId);

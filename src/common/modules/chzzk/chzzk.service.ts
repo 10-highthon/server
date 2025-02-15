@@ -14,6 +14,10 @@ export class ChzzkService {
     return await this.client.search.channels(query);
   }
 
+  async getChannel(channelId: string) {
+    return await this.client.channel(channelId);
+  }
+
   async getLiveDetail(channelId: string) {
     return await this.client.live.detail(channelId);
   }
