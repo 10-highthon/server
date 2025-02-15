@@ -21,8 +21,7 @@ export class FavoriteController {
 
   @Get()
   @ApiQuery({ name: "userId", required: true, type: String })
-  @ApiBody({ type: GetChannelsDTO })
-  async getChannels(@Query("userId") userId: string) {
+  async getChannels(@Query("userId") userId: string): Promise<GetChannelsDTO> {
     return await this.favoriteService.getChannels(userId);
   }
 
