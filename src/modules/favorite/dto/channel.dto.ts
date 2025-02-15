@@ -1,10 +1,4 @@
-import {
-  LiveDetail,
-  LivePlayback,
-  LivePollingStatus,
-  Media,
-  PartialChannel,
-} from "chzzk";
+import { LiveDetail, LivePollingStatus, PartialChannel } from "chzzk";
 import { IsString } from "class-validator";
 
 export class OneChannelDTO {
@@ -26,24 +20,7 @@ class PartialChannelDTO implements PartialChannel {
   personalData?: { privateUserBlock: boolean };
 }
 
-class LivePlaybackDTO implements LivePlayback {
-  meta: {
-    videoId: string;
-    streamSeq: number;
-    liveId: string;
-    paidLive: boolean;
-    cdnInfo: { cdnType: string; zeroRating: boolean };
-    p2p: boolean;
-  };
-  serviceMeta: { contentType: string };
-  live: { start: string; open: string; timeMachine: boolean; status: string };
-  api: { name: string; path: string }[];
-  media: Media[];
-  thumbnail: { snapshotThumbnailTemplate: string; types: string[] };
-  multiview;
-}
-
-class GetChannelDTO implements LiveDetail {
+class GetChannelDTO implements Partial<LiveDetail> {
   status: "OPEN" | "CLOSE";
   closeDate?: string;
   clipActive: boolean;
@@ -71,7 +48,6 @@ class GetChannelDTO implements LiveDetail {
   categoryType?: string;
   liveCategory?: string;
   liveCategoryValue?: string;
-  livePlayback: LivePlaybackDTO;
   channel: PartialChannelDTO;
 }
 

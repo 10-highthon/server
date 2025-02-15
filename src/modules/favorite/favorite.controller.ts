@@ -1,7 +1,11 @@
 import { Body, Controller, Delete, Get, Put, Query } from "@nestjs/common";
 import { ApiBody, ApiQuery, ApiTags } from "@nestjs/swagger";
 
-import { MultiChannelDTO, OneChannelDTO } from "./dto/channel.dto";
+import {
+  GetChannelsDTO,
+  MultiChannelDTO,
+  OneChannelDTO,
+} from "./dto/channel.dto";
 import { SearchDTO } from "./dto/search.dto";
 import { FavoriteService } from "./favorite.service";
 
@@ -17,6 +21,7 @@ export class FavoriteController {
 
   @Get()
   @ApiQuery({ name: "userId", required: true, type: String })
+  @ApiBody({ type: GetChannelsDTO })
   async getChannels(@Query("userId") userId: string) {
     return await this.favoriteService.getChannels(userId);
   }
