@@ -23,6 +23,11 @@ export class ChannelDTO implements Channel {
   personalData?: { privateUserBlock: boolean };
 }
 
+export class ChannelsDTO {
+  channels: ChannelDTO[];
+  count: number;
+}
+
 class PartialChannelDTO implements PartialChannel {
   channelId: string;
   channelName: string;
@@ -32,7 +37,7 @@ class PartialChannelDTO implements PartialChannel {
   personalData?: { privateUserBlock: boolean };
 }
 
-class GetChannelDTO implements Partial<LiveDetail> {
+export class GetChannelDTO implements Partial<LiveDetail> {
   status: "OPEN" | "CLOSE";
   closeDate?: string;
   clipActive: boolean;

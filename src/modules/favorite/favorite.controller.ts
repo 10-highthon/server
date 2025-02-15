@@ -5,6 +5,8 @@ import { GetUser } from "src/common/decorators/get.user.decorator";
 
 import {
   ChannelDTO,
+  ChannelsDTO,
+  GetChannelDTO,
   GetChannelsDTO,
   MultiChannelDTO,
   OneChannelDTO,
@@ -30,8 +32,24 @@ export class FavoriteController {
 
   @Get("/all")
   @ApiBearerAuth()
-  async getChannels(@GetUser() userId: string): Promise<GetChannelsDTO> {
+  async getChannels(@GetUser() userId: string): Promise<ChannelsDTO> {
     return await this.favoriteService.getChannels(userId);
+  }
+
+  @Get("/live")
+  @ApiBearerAuth()
+  @ApiQuery({ name: "channelId", type: String })
+  async getChannelLive(
+    @GetUser() userId: string,
+    @Query("channelId") channelId: string,
+  ): Promise<GetChannelDTO> {
+    return await this.favoriteService.getChannelLive(userId, channelId);
+  }
+
+  @Get("/live/all")
+  @ApiBearerAuth()
+  async getChannelsLive(@GetUser() userId: string): Promise<GetChannelsDTO> {
+    return await this.favoriteService.getChannelsLive(userId);
   }
 
   @Put("/add")

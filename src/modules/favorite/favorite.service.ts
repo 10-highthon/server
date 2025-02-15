@@ -27,6 +27,32 @@ export class FavoriteService {
       })
     ).map((favorite) => favorite.channelId);
 
+    return {
+      channels: await Promise.all(
+        channelIds.map((channelId) => this.chzzkService.getChannel(channelId)),
+      ),
+      count: channelIds.length,
+    };
+  }
+
+  async getChannelLive(userId: string, channelId: string) {
+    const liveDetail = await this.chzzkService.getLiveDetail(channelId);
+
+    return {
+      ...liveDetail,
+      videoUrl: liveDetail.livePlayback.media[0]?.path ?? "",
+    };
+  }
+
+  async getChannelsLive(userId: string) {
+    const channelIds = (
+      await this.prisma.favorite.findMany({
+        where: {
+          userId,
+        },
+      })
+    ).map((favorite) => favorite.channelId);
+
     const liveDetails = await Promise.all(
       channelIds.map((channelId) => this.chzzkService.getLiveDetail(channelId)),
     );
