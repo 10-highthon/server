@@ -8,9 +8,16 @@ datasource db {
 }
 
 model User {
+  id        String     @id @default(uuid())
+  createdAt DateTime   @default(now())
+  Favorite  Favorite[]
+}
+
+model Favorite {
   id        String   @id @default(uuid())
-  email     String   @unique
-  username  String
-  password  String?
+  channelId String
+  userId    String
   createdAt DateTime @default(now())
+
+  user User @relation(fields: [userId], references: [id])
 }

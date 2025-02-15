@@ -1,19 +1,12 @@
-import { $Enums } from "@prisma/client";
+import { User } from "@prisma/client";
 
-import { PartialType, PickType } from "@nestjs/swagger";
+export class CreateUserDTO implements User {
+  /**
+   * User ID
+   *
+   * @example UUID
+   */
+  id: string;
 
-import { UserDTO } from "./user.dto";
-
-export class CreateUserDTO extends PartialType(
-  PickType(UserDTO, [
-    "email",
-    "provider",
-    "providerId",
-    "password",
-    "username",
-  ]),
-) {
-  username: string;
-  email: string;
-  provider: $Enums.Provider;
+  createdAt: Date;
 }
