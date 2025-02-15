@@ -1,4 +1,4 @@
-import { Body, Controller, Delete, Get, Put, Query } from "@nestjs/common";
+import { Body, Controller, Get, Post, Put, Query } from "@nestjs/common";
 import { ApiBearerAuth, ApiBody, ApiQuery, ApiTags } from "@nestjs/swagger";
 
 import { GetUser } from "src/common/decorators/get.user.decorator";
@@ -62,7 +62,7 @@ export class FavoriteController {
     return await this.favoriteService.addChannel(userId, channelId);
   }
 
-  @Delete("/remove")
+  @Post("/remove")
   @ApiBody({ type: MultiChannelDTO })
   @ApiBearerAuth()
   async removeChannel(
