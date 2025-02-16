@@ -20,7 +20,8 @@ export class FavoriteController {
   constructor(private readonly favoriteService: FavoriteService) {}
 
   @Get("/search")
-  async searchChannels(query: string): Promise<SearchDTO> {
+  @ApiQuery({ name: "query", type: String })
+  async searchChannels(@Query("query") query: string): Promise<SearchDTO> {
     return await this.favoriteService.searchChannels(query);
   }
 
